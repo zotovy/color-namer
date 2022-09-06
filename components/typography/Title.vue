@@ -1,19 +1,18 @@
 <template>
-  <h1>
-    <slot></slot>
-  </h1>
+    <h1>
+        <slot></slot>
+    </h1>
 </template>
 
 <script>
 export default {
-  name: "TitleComponent"
+    name: "TitleComponent"
 }
 </script>
 
 <style scoped lang='scss'>
 h1 {
-  font-weight: 500;
-  color: var(--primary);
-  margin-bottom: 30px;
+    font-weight: 700;
+    font-size: 6rem;
 }
 </style>
