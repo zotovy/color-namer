@@ -1,0 +1,39 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: Poppins, -apple-system, Roboto, sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: var(--contrast);
+  transition: 0.15s;
+
+  &:hover {
+    opacity: 0.75;
+  }
+}
+
+:root {
+  // colors
+  --contrast: #00DC82;
+  --contrast-light: #F2FDF9;
+  --primary: #003543;
+  --secondary: #71717A;
+  --disabled: #A1A1AA;
+
+  // other
+  --curve: cubic-bezier(0, 0.45, 0.15, 1);
+}
