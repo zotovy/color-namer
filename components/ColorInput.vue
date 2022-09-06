@@ -39,5 +39,10 @@ input {
     &::placeholder {
         color: rgba(var(--contrast), 0.5);
     }
+
+    @media (max-width: 425px) {
+        margin-top: 30px;
+        text-align: center;
+    }
 }
 </style>

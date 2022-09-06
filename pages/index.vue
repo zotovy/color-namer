@@ -66,6 +66,13 @@ const handleClick = (e: MouseEvent) => {
         max-width: 40%;
         color: var(--contrast);
         transition: 0.15s ease;
+
+        @media (max-width: 425px) {
+            max-width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
     }
 }
 </style>
