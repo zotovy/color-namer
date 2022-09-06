@@ -1,15 +1,27 @@
 <template>
     <input
+        v-maska="{ mask: '!#HHHHHH', tokens: { 'H': { pattern: /[0-9a-fA-F]/, uppercase: true }}}"
         type="text"
         :value="modelValue"
-        v-maska="{ mask: '!#HHHHHH', tokens: { 'H': { pattern: /[0-9a-fA-F]/, uppercase: true }}}"
-        placeholder="#5c6ac4"
-        @input="$emit('update:modelValue')"/>
+        :placeholder="placeholder ?? '#5c6ac4'"
+        @blur="$emit('submit')"
+        @keyup.enter="$emit('submit')"
+        @input="handleInput"/>
 </template>
 
 <script setup lang="ts">
-defineProps(['modelValue'])
-defineEmits(['update:modelValue'])
+
+defineProps({
+    modelValue: {type: String},
+    placeholder: {type: String, default: "#5c6ac4"}
+})
+
+const emit = defineEmits(["submit", "update:modelValue"])
+
+const handleInput = (e: Event) => {
+    emit("update:modelValue", (e.target as HTMLInputElement).value)
+}
+
 </script>
 
 <style lang="scss" scoped>
@@ -25,8 +37,7 @@ input {
     width: 12rem;
 
     &::placeholder {
-        color: var(--contrast);
-        opacity: 0.5;
+        color: rgba(var(--contrast), 0.5);
     }
 }
 </style>
