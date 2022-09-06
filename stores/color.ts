@@ -22,6 +22,12 @@ export const useColorStore = defineStore("color", {
                     data.colors[0].rgb.b
                 ]
             }
+        },
+        async fetchRandom() {
+            console.log("fetching random color")
+            // generate random hex color
+            const hex = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            await this.fetch(hex);
         }
     },
 })
