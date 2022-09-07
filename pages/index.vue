@@ -23,10 +23,12 @@ const colorInput = ref("#5c6ac4");
 const color = useColorStore()
 
 useAsyncData(async () => {
-    await color.fetchRandom();
+    if (process.server) {
+        await color.fetchRandom();
+    }
 });
 
-color.$onAction(({ name, after }) => {
+color.$onAction(({name, after}) => {
     after((_) => {
         if (name === "fetch") {
             colorInput.value = color.hex.toUpperCase()
