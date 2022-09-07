@@ -1,5 +1,7 @@
-import { defineStore } from "pinia";
 import axios from "axios";
+import { defineStore } from "pinia";
+import { Color } from "~/types/Color";
+import { GetColorResponse } from "~/server/routes/color/[color]";
 
 export const useColorStore = defineStore("color", {
     state: () => ({
@@ -12,19 +14,15 @@ export const useColorStore = defineStore("color", {
             if (hex.length !== 7) return;
             hex = hex.slice(1);
 
-            const {status, data} = await axios.get(`https://api.color.pizza/v1/${ hex }`)
-            if (status === 200 && data.colors.length > 0) {
-                this.name = data.colors[0].name
-                this.hex = data.colors[0].hex
-                this.rgb = [
-                    data.colors[0].rgb.r,
-                    data.colors[0].rgb.g,
-                    data.colors[0].rgb.b
-                ]
+            const { data } = await axios.get<GetColorResponse>("color/" + hex);
+
+            if (data.status === "ok") {
+                this.name = data.color.name;
+                this.hex = data.color.hex;
+                this.rgb = data.color.rgb;
             }
         },
         async fetchRandom() {
-            console.log("fetching random color")
             // generate random hex color
             const hex = "#" + Math.floor(Math.random() * 16777215).toString(16);
             await this.fetch(hex);

@@ -36,13 +36,11 @@ const contrast = computed(() => {
 })
 
 const fetchColor = () => {
-    console.log("fetching color")
     color.fetch(colorInput.value);
 }
 
 const handleClick = (e: MouseEvent) => {
     if ((e.target as HTMLElement).nodeName === "INPUT") return
-    console.log(colorInput.value, color.hex)
 
     if (colorInput.value !== color.hex.toUpperCase()) fetchColor()
     else color.fetchRandom()
