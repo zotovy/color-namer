@@ -12,7 +12,7 @@
 <script setup lang="ts">
 
 defineProps({
-    modelValue: {type: String},
+    modelValue: {type: String, required: true},
     placeholder: {type: String, default: "#5c6ac4"}
 })
 
