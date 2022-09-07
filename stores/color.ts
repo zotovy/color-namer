@@ -1,3 +1,4 @@
+import { useRuntimeConfig } from "#app";
 import axios from "axios";
 import { defineStore } from "pinia";
 import { Color } from "~/types/Color";
@@ -34,7 +35,9 @@ export const fetchColor = async (hex: string): Promise<Color | null> => {
     if (hex.length !== 7) return;
     hex = hex.slice(1);
 
-    const {data} = await axios.get<GetColorResponse>("http://localhost:3000/color/" + hex);
+    const config = useRuntimeConfig()
+
+    const {data} = await axios.get<GetColorResponse>(`${config.baseUrl}/color/${hex}`);
 
     if (data.status === "ok") {
         return data.color as Color;
