@@ -11,15 +11,20 @@
 </template>
 
 <script setup lang="ts">
+import { useAsyncData } from "#app";
 import { ref } from "@vue/reactivity";
+import { computed } from "#imports";
 import { useColorStore } from "~/stores/color";
 import TitleComponent from "~/components/typography/Title";
 import ColorInput from "~/components/ColorInput.vue";
-import { computed } from "#imports";
 
 const colorInput = ref("#5c6ac4");
 
 const color = useColorStore()
+
+useAsyncData(async () => {
+    await color.fetchRandom();
+});
 
 color.$onAction(({ name, after }) => {
     after((_) => {

@@ -11,21 +11,34 @@ export const useColorStore = defineStore("color", {
     }) as Color,
     actions: {
         async fetch(hex: string) {
-            if (hex.length !== 7) return;
-            hex = hex.slice(1);
+            const color = await fetchColor(hex);
 
-            const { data } = await axios.get<GetColorResponse>("color/" + hex);
-
-            if (data.status === "ok") {
-                this.name = data.color.name;
-                this.hex = data.color.hex;
-                this.rgb = data.color.rgb;
+            if (color) {
+                this.name = color.name;
+                this.hex = color.hex;
+                this.rgb = color.rgb;
             }
         },
         async fetchRandom() {
-            // generate random hex color
-            const hex = "#" + Math.floor(Math.random() * 16777215).toString(16);
+            const hex = generateRandomHex()
             await this.fetch(hex);
         }
     },
 })
+
+export const generateRandomHex = (): string => {
+    return "#" + Math.floor(Math.random() * 16777215).toString(16)
+}
+
+export const fetchColor = async (hex: string): Promise<Color | null> => {
+    if (hex.length !== 7) return;
+    hex = hex.slice(1);
+
+    const {data} = await axios.get<GetColorResponse>("http://localhost:3000/color/" + hex);
+
+    if (data.status === "ok") {
+        return data.color as Color;
+    }
+
+    return null
+}

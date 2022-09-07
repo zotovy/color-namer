@@ -35,6 +35,7 @@ input {
     background: transparent;
     display: inline-block;
     width: 12rem;
+    text-transform: uppercase;
 
     &::placeholder {
         color: rgba(var(--contrast), 0.5);
