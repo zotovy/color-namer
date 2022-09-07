@@ -27,11 +27,11 @@ export const useColorStore = defineStore("color", {
     },
 })
 
-export const generateRandomHex = (): string => {
+const generateRandomHex = (): string => {
     return "#" + Math.floor(Math.random() * 16777215).toString(16)
 }
 
-export const fetchColor = async (hex: string): Promise<Color | null> => {
+const fetchColor = async (hex: string): Promise<Color | null> => {
     if (hex.length !== 7) return;
     hex = hex.slice(1);
 
@@ -44,4 +44,21 @@ export const fetchColor = async (hex: string): Promise<Color | null> => {
     }
 
     return null
+}
+
+// function that takes color as argument and replace favicon with circle of that color
+export const changeFavicon = (color: Color) => {
+    const favicon = document.createElement("link") as HTMLLinkElement;
+    favicon.rel = "icon"
+    document.getElementsByTagName('head')[0].appendChild(favicon);
+    const canvas = document.createElement("canvas");
+    // draw circle on canvas
+    canvas.width = 32;
+    canvas.height = 32;
+    const ctx = canvas.getContext("2d");
+    ctx.fillStyle = color.hex;
+    ctx.beginPath();
+    ctx.arc(16, 16, 16, 0, 2 * Math.PI);
+    ctx.fill();
+    favicon.href = canvas.toDataURL("image/png");
 }

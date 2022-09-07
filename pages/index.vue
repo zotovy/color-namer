@@ -1,4 +1,7 @@
 <template>
+<!--    <Head>-->
+<!--        <Title>Generate color name</Title>-->
+<!--    </Head>-->
     <main
         class="color-container"
         :style="{ '--bg': color.hex, '--contrast': contrast }"
@@ -14,7 +17,7 @@
 import { useAsyncData } from "#app";
 import { ref } from "@vue/reactivity";
 import { computed } from "#imports";
-import { useColorStore } from "~/stores/color";
+import { changeFavicon, useColorStore } from "~/stores/color";
 import TitleComponent from "~/components/typography/Title";
 import ColorInput from "~/components/ColorInput.vue";
 
@@ -25,6 +28,8 @@ const color = useColorStore()
 useAsyncData(async () => {
     if (process.server) {
         await color.fetchRandom();
+    } else {
+        changeFavicon(color);
     }
 });
 
@@ -32,6 +37,9 @@ color.$onAction(({name, after}) => {
     after((_) => {
         if (name === "fetch") {
             colorInput.value = color.hex.toUpperCase()
+            if (process.client) {
+                changeFavicon(color)
+            }
         }
     })
 })

@@ -6,14 +6,14 @@ import Icons from 'unplugin-icons/vite'
 export default defineNuxtConfig({
     // Global page headers: https://go.nuxtjs.dev/config-head
     head: {
-        title: 'vue-todolist',
+        titleTemplate: 'Generate color name',
         meta: [
             {charset: 'utf-8'},
-            {name: 'viewport', content: 'width=device-width, initial-scale=1'},
+            // {name: 'viewport', content: 'width=device-width, initial-scale=1'},
             {hid: 'description', name: 'description', content: ''},
             {name: 'format-detection', content: 'telephone=no'}
         ],
-        link: [{rel: 'icon', type: 'image/x-icon', href: '/favicon.ico'}]
+        link: [{rel: 'icon', type: 'image/x-icon', href: '~/assets/favicon.png'}]
     },
 
     // Global CSS: https://go.nuxtjs.dev/config-css
@@ -54,7 +54,7 @@ export default defineNuxtConfig({
 
     googleFonts: {
         families: {
-            Poppins: [300, 400, 500, 600, 700]
+            Inter: [300, 400, 500, 600, 700]
         }
     },
 
