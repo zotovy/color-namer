@@ -1,4 +1,6 @@
-# Nuxt 3 Minimal Starter
+![](./.github/preview.png)
+
+# Name your color
 
 Look at the [nuxt 3 documentation](https://v3.nuxtjs.org) to learn more.
 
