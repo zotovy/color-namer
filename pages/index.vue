@@ -1,7 +1,7 @@
 <template>
-<!--    <Head>-->
-<!--        <Title>Generate color name</Title>-->
-<!--    </Head>-->
+    <Head>
+        <Title>Generate color name</Title>
+    </Head>
     <main
         class="color-container"
         :style="{ '--bg': color.hex, '--contrast': contrast }"
